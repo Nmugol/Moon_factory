@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://r858qkcjh4ex"]
+
+[ext_resource type="Texture2D" uid="uid://cunxu35sue8wm" path="res://Img/Teren_tails_map.png" id="1_kpm8a"]
+[ext_resource type="Script" path="res://Script/teren_gen.gd" id="2_ncg7m"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6bnrt"]
+texture = ExtResource("1_kpm8a")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_b366v"]
+tile_shape = 1
+tile_size = Vector2i(32, 16)
+sources/0 = SubResource("TileSetAtlasSource_6bnrt")
+
+[node name="Teren" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+y_sort_enabled = true
+texture_filter = 1
+tile_set = SubResource("TileSet_b366v")
+format = 2
+layer_0/y_sort_enabled = true
+script = ExtResource("2_ncg7m")
