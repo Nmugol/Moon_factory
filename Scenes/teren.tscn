@@ -7,7 +7,8 @@
 texture = ExtResource("1_kpm8a")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
-0:1/0 = 0
+1:0/0 = 0
+2:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_b366v"]
 tile_shape = 1
@@ -23,3 +24,5 @@ tile_set = SubResource("TileSet_b366v")
 format = 2
 layer_0/y_sort_enabled = true
 script = ExtResource("2_ncg7m")
+chank_size = 32
+world_size = 5
