@@ -25,16 +25,8 @@ func _ready():
 	pass
 	
 func SetTaile(poz_x,poz_y)->void:
-	var leyer = round(tile_layer.get_noise_2d(poz_x,poz_y))*2.5+2.5
-	var tile_x = round(tile_x_poz.get_noise_2d(poz_x,poz_y))*2+2
-	var tile_y = round(tile_y_poz.get_noise_2d(poz_x,poz_y))+1
+	var leyer = round(tile_layer.get_noise_2d(poz_x,poz_y)*2.5+2.5)
+	var tile_x = round(tile_x_poz.get_noise_2d(poz_x,poz_y)*3+2)
+	var tile_y = round(tile_y_poz.get_noise_2d(poz_x,poz_y)*2+1)
 	set_cell(leyer,Vector2i(poz_x,poz_y),0,Vector2i(tile_x,tile_y),0)
 	pass
-
-func SetGround(leyer,poz_x,poz_y)->void:
-	if leyer>=0:
-		set_cell(leyer,Vector2i(poz_x,poz_y),0,Vector2i(0,0),0)
-		SetGround(leyer-1,poz_x,poz_y)
-		pass
-	pass
-

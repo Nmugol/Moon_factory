@@ -24,6 +24,7 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_b366v"]
 tile_shape = 1
+tile_layout = 5
 tile_size = Vector2i(32, 16)
 sources/0 = SubResource("TileSetAtlasSource_6bnrt")
 
@@ -76,4 +77,6 @@ chank_size = 32
 world_size = 5
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.2, 0.2)
+position = Vector2(-441, 1140)
+anchor_mode = 0
+zoom = Vector2(2.5, 2.5)
