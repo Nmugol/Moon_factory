@@ -3,6 +3,13 @@ extends TileMap
 @export var chunk_size:int = 16 # Rozmiar pojedynczego kafelka w pikselach
 @export var world_size:int = 9  # Rozmiar świata, liczba chunków na jednej osi
 
+## Ustawienie rozmiaru mapy i pozycji pierwszego kafelka
+var map_size:int = chunk_size * world_size
+var start_pos:int = round(map_size / 2) * (-1)
+	
+## Utworzenie tablicy dwuwymiarowej o wymiarach start_pos*(-1) na start_pos*(-1)
+var map_array = Empty2DArray(start_pos * (-1), start_pos * (-1))
+
 var tile_x_noise = FastNoiseLite.new()     # Obiekt FastNoiseLite dla pozycji X kafelków
 var tile_y_noise = FastNoiseLite.new()     # Obiekt FastNoiseLite dla pozycji Y kafelków
 var tile_layer_noise = FastNoiseLite.new() # Obiekt FastNoiseLite dla warstw kafelków
@@ -30,13 +37,6 @@ func GenerateTerrain():
 	## Ustawienie szumu dla warstw kafelków
 	tile_layer_noise.seed = randi()
 	tile_layer_noise.fractal_octaves = 1
-	
-	## Ustawienie rozmiaru mapy i pozycji pierwszego kafelka
-	var map_size:int = chunk_size * world_size
-	var start_pos:int = round(map_size / 2) * (-1)
-	
-	## Utworzenie tablicy dwuwymiarowej o wymiarach start_pos*(-1) na start_pos*(-1)
-	var map_array = Empty2DArray(start_pos * (-1), start_pos * (-1))
 	
 	# Pętle generujące kafelki
 	for pos_x in range(start_pos, start_pos * (-1)):
