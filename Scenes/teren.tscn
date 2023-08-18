@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://r858qkcjh4ex"]
+[gd_scene load_steps=7 format=3 uid="uid://r858qkcjh4ex"]
 
 [ext_resource type="Texture2D" uid="uid://cunxu35sue8wm" path="res://Img/Teren_tails_map.png" id="1_kpm8a"]
+[ext_resource type="Texture2D" uid="uid://bbxcmshwxt3s4" path="res://Img/Alien.png" id="2_bgein"]
 [ext_resource type="Script" path="res://Script/teren_gen.gd" id="2_ncg7m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6bnrt"]
@@ -22,56 +23,108 @@ texture_region_size = Vector2i(32, 32)
 4:0/0 = 0
 4:1/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u6l58"]
+texture = ExtResource("2_bgein")
+texture_region_size = Vector2i(32, 32)
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+2:0/size_in_atlas = Vector2i(3, 2)
+2:0/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_b366v"]
 tile_shape = 1
 tile_layout = 4
 tile_size = Vector2i(32, 16)
 sources/0 = SubResource("TileSetAtlasSource_6bnrt")
+sources/1 = SubResource("TileSetAtlasSource_u6l58")
 
 [node name="Teren" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [-1.0]
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
 texture_filter = 1
 tile_set = SubResource("TileSet_b366v")
 format = 2
-layer_0/name = "L0"
+layer_0/name = "L0 - teren"
 layer_0/y_sort_enabled = true
-layer_1/name = "L1"
+layer_1/name = "L1 - teren"
 layer_1/enabled = true
 layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = true
 layer_1/y_sort_origin = 0
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array()
-layer_2/name = "L2"
+layer_2/name = "L2 - teren"
 layer_2/enabled = true
 layer_2/modulate = Color(1, 1, 1, 1)
 layer_2/y_sort_enabled = true
 layer_2/y_sort_origin = 0
 layer_2/z_index = 2
 layer_2/tile_data = PackedInt32Array()
-layer_3/name = "L3"
+layer_3/name = "L3 - teren"
 layer_3/enabled = true
 layer_3/modulate = Color(1, 1, 1, 1)
 layer_3/y_sort_enabled = true
 layer_3/y_sort_origin = 0
 layer_3/z_index = 3
 layer_3/tile_data = PackedInt32Array()
-layer_4/name = "L4"
+layer_4/name = "L4 - teren"
 layer_4/enabled = true
 layer_4/modulate = Color(1, 1, 1, 1)
 layer_4/y_sort_enabled = true
 layer_4/y_sort_origin = 0
 layer_4/z_index = 4
 layer_4/tile_data = PackedInt32Array()
-layer_5/name = "L5"
+layer_5/name = "L5 - teren"
 layer_5/enabled = true
 layer_5/modulate = Color(1, 1, 1, 1)
 layer_5/y_sort_enabled = true
 layer_5/y_sort_origin = 0
 layer_5/z_index = 5
 layer_5/tile_data = PackedInt32Array()
+layer_6/name = "L1 - obcy"
+layer_6/enabled = true
+layer_6/modulate = Color(1, 1, 1, 1)
+layer_6/y_sort_enabled = true
+layer_6/y_sort_origin = 0
+layer_6/z_index = 1
+layer_6/tile_data = PackedInt32Array()
+layer_7/name = "L2 - obcy"
+layer_7/enabled = true
+layer_7/modulate = Color(1, 1, 1, 1)
+layer_7/y_sort_enabled = true
+layer_7/y_sort_origin = 0
+layer_7/z_index = 2
+layer_7/tile_data = PackedInt32Array()
+layer_8/name = "L3 - obcy"
+layer_8/enabled = true
+layer_8/modulate = Color(1, 1, 1, 1)
+layer_8/y_sort_enabled = true
+layer_8/y_sort_origin = 0
+layer_8/z_index = 3
+layer_8/tile_data = PackedInt32Array()
+layer_9/name = "L4 - obcy"
+layer_9/enabled = true
+layer_9/modulate = Color(1, 1, 1, 1)
+layer_9/y_sort_enabled = true
+layer_9/y_sort_origin = 0
+layer_9/z_index = 4
+layer_9/tile_data = PackedInt32Array()
+layer_10/name = "L5 - obcy"
+layer_10/enabled = true
+layer_10/modulate = Color(1, 1, 1, 1)
+layer_10/y_sort_enabled = true
+layer_10/y_sort_origin = 0
+layer_10/z_index = 5
+layer_10/tile_data = PackedInt32Array()
+layer_11/name = "L5 - obcy"
+layer_11/enabled = true
+layer_11/modulate = Color(1, 1, 1, 1)
+layer_11/y_sort_enabled = true
+layer_11/y_sort_origin = 0
+layer_11/z_index = 6
+layer_11/tile_data = PackedInt32Array()
 script = ExtResource("2_ncg7m")
 chunk_size = 32
 world_size = 7
