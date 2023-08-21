@@ -8,4 +8,4 @@ class Tile:
 class Nest:
 	var x:int
 	var y:int
-	var layer:int
+	var z_index:int

@@ -1,10 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://r858qkcjh4ex"]
+[gd_scene load_steps=6 format=3 uid="uid://r858qkcjh4ex"]
 
-[ext_resource type="Texture2D" uid="uid://cunxu35sue8wm" path="res://Img/Teren_tails_map.png" id="1_kpm8a"]
-[ext_resource type="Script" path="res://Script/teren_gen.gd" id="2_ncg7m"]
+[ext_resource type="Texture2D" uid="uid://cunxu35sue8wm" path="res://Img/Teren_tails_map.png" id="1_g1mjg"]
+[ext_resource type="Script" path="res://Script/Teren.gd" id="2_tguws"]
+[ext_resource type="Script" path="res://Script/Nest.gd" id="3_ahae2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6bnrt"]
-texture = ExtResource("1_kpm8a")
+texture = ExtResource("1_g1mjg")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -28,10 +29,10 @@ tile_layout = 4
 tile_size = Vector2i(32, 16)
 sources/0 = SubResource("TileSetAtlasSource_6bnrt")
 
-[node name="Teren" type="Node2D"]
+[node name="Generacja terenu" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [-1.0]
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="Teren" type="TileMap" parent="."]
 y_sort_enabled = true
 texture_filter = 1
 tile_set = SubResource("TileSet_b366v")
@@ -73,10 +74,14 @@ layer_5/y_sort_enabled = true
 layer_5/y_sort_origin = 0
 layer_5/z_index = 5
 layer_5/tile_data = PackedInt32Array()
-script = ExtResource("2_ncg7m")
+script = ExtResource("2_tguws")
 chunk_size = 32
 world_size = 7
 
+[node name="Nest" type="Node2D" parent="."]
+script = ExtResource("3_ahae2")
+
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(341, -15)
-zoom = Vector2(2, 2)
+zoom = Vector2(0.2, 0.2)
+
+[connection signal="Plase_nest" from="Teren" to="Nest" method="_on_teren_plase_nest"]

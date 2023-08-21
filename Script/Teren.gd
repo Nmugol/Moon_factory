@@ -1,5 +1,8 @@
 extends TileMap
 
+#Sygnały
+signal Plase_nest(cord:Vector2i, z)
+
 ## Inne pliki
 @onready var SingleTile = preload("res://Script/Class/Tiles.gd")
 
@@ -19,6 +22,7 @@ var start_pos:int = round(map_size / 2.0) * (-1)
 
 # Tabliza na mapę
 var map_array = []
+var nest_array = []
 
 func _ready():
 	## Ustawienie szumu dla pozycji X i Y kafelków
@@ -59,9 +63,33 @@ func GenerateTerrain():
 			# Ustawienie kafelka w obiekcie TileMap na odpowiedniej pozycji i warstwie
 			set_cell(layer, Vector2(pos_x, pos_y), 0, Vector2(tile_x, tile_y), 0)
 			
-			#var cored = map_to_local(Vector2i(pos_x,pos_y))
-
+			var border_x:bool = pos_x < start_pos+6 and pos_x < (-1*start_pos)-6
+			var border_y:bool = pos_y < start_pos+6 and pos_y < (-1*start_pos)-6
+			if tile_x != 0 or border_x or border_y:
+				continue
+			
+			if EnoughSpace(pos_x,pos_y,layer):
+				var single_nest = SingleTile.Nest.new()
+				var cored = map_to_local(Vector2i(pos_x,pos_y))
+				var index = world_size-pos_x+100
+				emit_signal("Plase_nest",cored,index)
+				single_nest.x = cored.x-16
+				single_nest.y = cored.y-16
+				single_nest.z_index = index
+				nest_array.append(single_nest)
+				single_nest=null
+	
 	# Zwolnienie pamięci 
 	tile_x_noise = null
 	tile_y_noise = null
 	tile_layer_noise = null
+
+func EnoughSpace(x,y,l) -> bool:
+	var owset = 10
+	for i in range(-1*(owset/2.0),owset/2.0):
+		for j in range(-1,owset):
+			var _l = round(tile_layer_noise.get_noise_2d(x+i,y+j) * 3 + 2.5)
+			var _x = round(tile_x_noise.get_noise_2d(x+i,y+j) * 3 + 2)
+			if _x != 0 and _l != l:
+				return false
+	return true
