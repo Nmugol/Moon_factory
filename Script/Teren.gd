@@ -28,11 +28,6 @@ func _ready():
 	## Ustawienie szumu dla pozycji X i Y kafelków
 	tile_x_noise.seed = randi()
 	tile_y_noise.seed = randi()
-
-	## Generowanie nowego ziarna dla losowych wartości 
-	randomize()
-
-	## Ustawienie szumu dla warstw kafelków
 	tile_layer_noise.seed = randi()
 	tile_layer_noise.fractal_octaves = 1
 
@@ -63,20 +58,37 @@ func GenerateTerrain():
 			# Ustawienie kafelka w obiekcie TileMap na odpowiedniej pozycji i warstwie
 			set_cell(layer, Vector2(pos_x, pos_y), 0, Vector2(tile_x, tile_y), 0)
 			
-			var border_x:bool = pos_x < start_pos+6 and pos_x < (-1*start_pos)-6
-			var border_y:bool = pos_y < start_pos+6 and pos_y < (-1*start_pos)-6
+			#Odstęp od krawędzi
+			var distans:int = 6
+			var border_x:bool = pos_x < start_pos+distans and pos_x < (-1*start_pos)-distans
+			var border_y:bool = pos_y < start_pos+distans and pos_y < (-1*start_pos)-distans
 			if tile_x != 0 or border_x or border_y:
 				continue
 			
+			#Sprawdzanie czy mamy miejsce na gniazdo
 			if EnoughSpace(pos_x,pos_y,layer):
+				
+				#Nowy obiket Nest
 				var single_nest = SingleTile.Nest.new()
+				
+				#Zamian współżadnych map na globalne
 				var cored = map_to_local(Vector2i(pos_x,pos_y))
+				
+				#Obliczenia z_index dla gniazda
 				var index = world_size-pos_x+100
+				
+				#Wysłanie sygnału ustawiającego gniazdo
 				emit_signal("Plase_nest",cored,index)
-				single_nest.x = cored.x-16
-				single_nest.y = cored.y-16
+				
+				#Wypełnienie paremetró obiktu Nest
+				single_nest.x = cored.x-4
+				single_nest.y = cored.y-8
 				single_nest.z_index = index
+				
+				#Dodanie go do tablizy
 				nest_array.append(single_nest)
+				
+				#Usunięcie obiektu
 				single_nest=null
 	
 	# Zwolnienie pamięci 
@@ -84,12 +96,21 @@ func GenerateTerrain():
 	tile_y_noise = null
 	tile_layer_noise = null
 
-func EnoughSpace(x,y,l) -> bool:
-	var owset = 10
-	for i in range(-1*(owset/2.0),owset/2.0):
-		for j in range(-1,owset):
-			var _l = round(tile_layer_noise.get_noise_2d(x+i,y+j) * 3 + 2.5)
-			var _x = round(tile_x_noise.get_noise_2d(x+i,y+j) * 3 + 2)
-			if _x != 0 and _l != l:
+func EnoughSpace(x,y,l):
+	
+	
+	for i in range(-1,2):
+		for j in range(-1,2):
+			
+			#Pomijanie śtodkowaego klfelka
+			if i == 0 and j == 0:
+				continue
+			
+			#informacje o oatczającym kaferlku 
+			var tl = round(tile_layer_noise.get_noise_2d(x+i,y+j) * 3 + 2.5)
+			var tx = round(tile_x_noise.get_noise_2d(x+i,y+j) * 3 + 2)
+			
+			#Jeśli kafelki nie spełniją warunków zabroń sładzenie 
+			if !(tx == 0 and tl == l):
 				return false
 	return true
