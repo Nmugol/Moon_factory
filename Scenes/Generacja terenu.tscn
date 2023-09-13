@@ -82,7 +82,6 @@ world_size = 7
 script = ExtResource("3_ahae2")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-69, 875)
-zoom = Vector2(2, 2)
+zoom = Vector2(0.25, 0.25)
 
 [connection signal="Plase_nest" from="Teren" to="Nest" method="_on_teren_plase_nest"]
