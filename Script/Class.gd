@@ -1,3 +1,5 @@
+extends Node2D
+
 class Tile:
 	var x:int
 	var y:int
@@ -6,6 +8,6 @@ class Tile:
 	var type_y:int
 
 class Nest:
-	var x:int
-	var y:int
-	var z_index:int
+	var x:float
+	var y:float
+	var index:int
