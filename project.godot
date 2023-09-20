@@ -11,5 +11,11 @@ config_version=5
 [application]
 
 config/name="Moon_factory"
+run/main_scene="res://Scenes/Generacja terenu.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GlobaData="*res://Script/Data/Globa_data.gd"
+CustomClass="*res://Script/Class.gd"
