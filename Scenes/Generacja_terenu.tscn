@@ -84,7 +84,7 @@ script = ExtResource("3_g8sqo")
 script = ExtResource("4_ag42r")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.2, 0.2)
+zoom = Vector2(0.25, 0.25)
 
 [connection signal="Plase_nest" from="Teren" to="Nest" method="_on_teren_plase_nest"]
 [connection signal="Plase_tree" from="Teren" to="Tree" method="_on_teren_plase_tree"]

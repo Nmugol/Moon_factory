@@ -43,13 +43,6 @@ func GenerateTerrain():
 			# Ustawienie kafelka w obiekcie TileMap na odpowiedniej pozycji i warstwie
 			set_cell(layer, Vector2(pos_x, pos_y), 0, Vector2(tile_x, tile_y), 0)
 			
-			#Odstęp od krawędzi
-			var distans:int = 6
-			var border_x:bool = pos_x < GlobaData.start_pos+distans and pos_x < (-1*GlobaData.start_pos)-distans
-			var border_y:bool = pos_y < GlobaData.start_pos+distans and pos_y < (-1*GlobaData.start_pos)-distans
-			if border_x or border_y:
-				continue
-			
 			#Sprawdzanie czy mamy miejsce na gniazdo
 			if EnoughSpace(pos_x,pos_y,layer,1,[0]):
 				AddNest(pos_x,pos_y)
@@ -91,7 +84,7 @@ func AddNest(pos_x:int,pos_y:int)->void:
 	var cored = map_to_local(Vector2i(pos_x,pos_y))
 	
 	#Obliczenia z_index dla gniazda
-	var index = GlobaData.world_size-pos_x+100
+	var index = GlobaData.world_size - pos_x + 100
 	
 	#Wysłanie sygnału ustawiającego gniazdo
 	emit_signal("Plase_nest",cored,index)
@@ -99,6 +92,6 @@ func AddNest(pos_x:int,pos_y:int)->void:
 func AddTree(pos_x,pos_y):
 	var cord = map_to_local(Vector2i(pos_x,pos_y))
 
-	var index = GlobaData.world_size-pos_x+100
+	var index = GlobaData.world_size - pos_x + 100
 
 	emit_signal("Plase_tree",cord,index)

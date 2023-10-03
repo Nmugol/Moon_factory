@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://bbxcmshwxt3s4" path="res://Img/Alien.png" id="1_rd8rn"]
 
 [node name="Alien nest" type="Node2D"]
-position = Vector2(-7, 1)
 metadata/_edit_group_ = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -13,5 +12,6 @@ texture_filter = 1
 texture = ExtResource("1_rd8rn")
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="Area2D"]
+visible = false
 rotation = 1.5708
 polygon = PackedVector2Array(-10.9999, 20, -5.99993, 19, -2.99993, 18, 1.00005, 15, 8.00008, 21, 17, -6.1512e-05, 11.9999, -16, 7.99993, -20, 0.999938, -17, -1.00007, -18, -6.00007, -20, -11.0001, -20, -14.0001, -19, -16.0001, -14.9999, -16, -8.99994, -14, -5.99995, -17, -2.99994, -18, 4.00007, -16, 7.00006, -15.9999, 14.0001, -14.9999, 17.0001)

@@ -13,8 +13,10 @@ var map_array = []
 var nest_array = []
 
 # Alien
-var nest_offset_x:int = 4
-var nest_offset_y:int = 8
+var nest_offset:int = 16
+
+#Tree
+var tree_offset:int = 50 
 
 func _ready():
 	map_size = chunk_size * world_size
