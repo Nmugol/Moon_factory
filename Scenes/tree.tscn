@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmjcoupjq2hjc"]
+
+[ext_resource type="Texture2D" uid="uid://1kcj6jrr8grq" path="res://Img/Tree.png" id="1_fcamk"]
+
+[node name="Tree" type="Node2D"]
+metadata/_edit_group_ = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Tree_sprite" type="Sprite2D" parent="Area2D"]
+texture = ExtResource("1_fcamk")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(10, 41, 4, 43, 1, 47, -1, 47, -5, 44, -10, 43, -7, 39, -5, 38, -4, 35, -3, 32, -3, 28, -5, 27, -5, 22, -4, 22, -4, 17, -7, 14, -9, 10, -9, 0, 6, 0, 6, 9, 4, 13, 3, 20, 1, 24, 0, 24, 0, 28, 2, 34, 5, 35)

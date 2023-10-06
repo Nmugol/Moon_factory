@@ -1,11 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://r858qkcjh4ex"]
+[gd_scene load_steps=7 format=3 uid="uid://r858qkcjh4ex"]
 
-[ext_resource type="Texture2D" uid="uid://cunxu35sue8wm" path="res://Img/Teren_tails_map.png" id="1_g1mjg"]
-[ext_resource type="Script" path="res://Script/Teren.gd" id="2_tguws"]
-[ext_resource type="Script" path="res://Script/Nest.gd" id="3_ahae2"]
+[ext_resource type="Texture2D" uid="uid://cunxu35sue8wm" path="res://Img/Teren_tails_map.png" id="1_2qht4"]
+[ext_resource type="Script" path="res://Script/Teren.gd" id="2_vauea"]
+[ext_resource type="Script" path="res://Script/Nest.gd" id="3_g8sqo"]
+[ext_resource type="Script" path="res://Script/Tree.gd" id="4_ag42r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6bnrt"]
-texture = ExtResource("1_g1mjg")
+texture = ExtResource("1_2qht4")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -74,12 +75,20 @@ layer_5/y_sort_enabled = true
 layer_5/y_sort_origin = 0
 layer_5/z_index = 5
 layer_5/tile_data = PackedInt32Array()
+<<<<<<< HEAD:Scenes/Generacja terenu.tscn
 script = ExtResource("2_tguws")
+=======
+script = ExtResource("2_vauea")
+>>>>>>> feature/add-tree:Scenes/Generacja_terenu.tscn
 
 [node name="Nest" type="Node2D" parent="."]
-script = ExtResource("3_ahae2")
+script = ExtResource("3_g8sqo")
+
+[node name="Tree" type="Node2D" parent="."]
+script = ExtResource("4_ag42r")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.25, 0.25)
 
 [connection signal="Plase_nest" from="Teren" to="Nest" method="_on_teren_plase_nest"]
+[connection signal="Plase_tree" from="Teren" to="Tree" method="_on_teren_plase_tree"]

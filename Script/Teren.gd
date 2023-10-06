@@ -1,7 +1,12 @@
 extends TileMap
 
 # Sygnały
+<<<<<<< HEAD
 signal Plase_nest(cord:Vector2i, zIndex)
+=======
+signal Plase_nest(cord:Vector2i, zIndex:int)
+signal Plase_tree(cord:Vector2i, zIndex:int)
+>>>>>>> feature/add-tree
 
 # Zmienne z biblioteki
 var tile_x_noise = FastNoiseLite.new()     # Obiekt FastNoiseLite dla pozycji X kafelków
@@ -42,6 +47,7 @@ func GenerateTerrain():
 			# Ustawienie kafelka w obiekcie TileMap na odpowiedniej pozycji i warstwie
 			set_cell(layer, Vector2(pos_x, pos_y), 0, Vector2(tile_x, tile_y), 0)
 			
+<<<<<<< HEAD
 			#Odstęp od krawędzi
 			var distans:int = 6
 			var border_x:bool = pos_x < GlobaData.start_pos+distans and pos_x < (-1*GlobaData.start_pos)-distans
@@ -74,25 +80,63 @@ func GenerateTerrain():
 				
 				#Usunięcie obiektu
 				single_nest=null
+=======
+			#Sprawdzanie czy mamy miejsce na gniazdo
+			if EnoughSpace(pos_x,pos_y,layer,1,[0]):
+				AddNest(pos_x,pos_y)
+			
+			if EnoughSpace(pos_x,pos_y,layer,1,[1,2]):
+				AddTree(pos_x,pos_y)
+>>>>>>> feature/add-tree
 	
 	# Zwolnienie pamięci 
 	tile_x_noise = null
 	tile_y_noise = null
 	tile_layer_noise = null
 
+<<<<<<< HEAD
 func EnoughSpace(x,y,l):
 	for i in range(-1,2):
 		for j in range(-1,2):
+=======
+func EnoughSpace(pos_x:int,pos_y:int,layer:int,distance:int,teren:Array):
+	for i in range(-distance,distance+1):
+		for j in range(-distance,distance+1):
+>>>>>>> feature/add-tree
 			
 			#Pomijanie śtodkowaego klfelka
 			if i == 0 and j == 0:
 				continue
 			
 			#informacje o oatczającym kaferlku 
-			var tl = round(tile_layer_noise.get_noise_2d(x+i,y+j) * 3 + 2.5)
-			var tx = round(tile_x_noise.get_noise_2d(x+i,y+j) * 3 + 2)
+			var tilelayer = round(tile_layer_noise.get_noise_2d(pos_x+i,pos_y+j) * 3 + 2.5)
+			var tilex = round(tile_x_noise.get_noise_2d(pos_x+i,pos_y+j) * 3 + 2)
 			
-			#Jeśli kafelki nie spełniją warunków zabroń sładzenie 
-			if !(tx == 0 and tl == l):
-				return false
-	return true
+			if IsInArray(teren,tilex) and tilelayer == layer:
+				return true
+	return false
+	
+func IsInArray(table:Array,value:int)->bool:
+	var found = false
+	for e in table:
+		if e == value:
+			found = true
+	return found
+	
+func AddNest(pos_x:int,pos_y:int)->void:
+
+	#Zamian współżadnych map na globalne
+	var cored = map_to_local(Vector2i(pos_x,pos_y))
+	
+	#Obliczenia z_index dla gniazda
+	var index = GlobaData.world_size - pos_x + 100
+	
+	#Wysłanie sygnału ustawiającego gniazdo
+	emit_signal("Plase_nest",cored,index)
+
+func AddTree(pos_x,pos_y):
+	var cord = map_to_local(Vector2i(pos_x,pos_y))
+
+	var index = GlobaData.world_size - pos_x + 100
+
+	emit_signal("Plase_tree",cord,index)
