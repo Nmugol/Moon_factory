@@ -11,11 +11,7 @@ config_version=5
 [application]
 
 config/name="Moon_factory"
-<<<<<<< HEAD
-run/main_scene="res://Scenes/Generacja terenu.tscn"
-=======
 run/main_scene="res://Scenes/Generacja_terenu.tscn"
->>>>>>> feature/add-tree
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -23,10 +19,7 @@ config/icon="res://icon.svg"
 
 GlobaData="*res://Script/Data/Globa_data.gd"
 CustomClass="*res://Script/Class.gd"
-<<<<<<< HEAD
-=======
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
->>>>>>> feature/add-tree
