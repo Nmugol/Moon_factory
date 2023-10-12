@@ -2,8 +2,8 @@ extends TileMap
 
 # Sygnały
 
-signal Plase_nest(cord:Vector2i, zIndex:int)
-signal Plase_tree(cord:Vector2i, zIndex:int)
+signal Plase_nest(position_x:int, position_y:int, z_Index:int)
+signal Plase_tree(position_x:int, position_y:int, z_Index:int)
 
 
 # Zmienne z biblioteki
@@ -83,17 +83,17 @@ func IsInArray(table:Array,value:int)->bool:
 func AddNest(pos_x:int,pos_y:int)->void:
 
 	#Zamian współżadnych map na globalne
-	var cored = map_to_local(Vector2i(pos_x,pos_y))
+	var cord = map_to_local(Vector2i(pos_x,pos_y))
 	
 	#Obliczenia z_index dla gniazda
 	var index = GlobaData.world_size - pos_x + 100
 	
 	#Wysłanie sygnału ustawiającego gniazdo
-	emit_signal("Plase_nest",cored,index)
+	emit_signal("Plase_nest", cord.x, cord.y, index)
 
 func AddTree(pos_x,pos_y):
 	var cord = map_to_local(Vector2i(pos_x,pos_y))
 
 	var index = GlobaData.world_size - pos_x + 100
 
-	emit_signal("Plase_tree",cord,index)
+	emit_signal("Plase_tree", cord.x, cord.y, index)
