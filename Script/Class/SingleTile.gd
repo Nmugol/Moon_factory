@@ -14,3 +14,6 @@ func _init(x:int, y:int, z:int, t:int, b:int):
 	z_index = z
 	teren = t
 	biom = b
+	
+	ToSave.map.append(self)
+

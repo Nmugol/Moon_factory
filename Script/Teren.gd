@@ -1,10 +1,11 @@
 extends TileMap
 
 # Sygnały
-
 signal Plase_nest(position_x:int, position_y:int, z_Index:int)
 signal Plase_tree(position_x:int, position_y:int, z_Index:int)
 
+# Clasy
+var teten_tile = load("res://Script/Class/SingleTile.gd")
 
 # Zmienne z biblioteki
 var tile_x_noise = FastNoiseLite.new()     # Obiekt FastNoiseLite dla pozycji X kafelków
@@ -30,27 +31,20 @@ func GenerateTerrain():
 			var tile_y = round(tile_y_noise.get_noise_2d(pos_x, pos_y) * 2 + 1)     # Wygenerowanie wartości dla pozycji Y kafelka
 
 			# Utworzenie obiektu SingleTile i ustawienie jego właściwości
-			var single_tile = CustomClass.Tile.new()
-			single_tile.x = pos_x
-			single_tile.y = pos_y
-			single_tile.type_x = tile_x
-			single_tile.type_y = tile_y
-			single_tile.layer = layer
-
-			# Dodanie pojedynczego kafelka do tablicy map_array
-			GlobaData.map_array.append(single_tile)
+			var single_tile = teten_tile.new(pos_x, pos_y, layer, tile_x, tile_y)
 
 			# Zwolnienie pemięci 
 			single_tile = null
+			
 			# Ustawienie kafelka w obiekcie TileMap na odpowiedniej pozycji i warstwie
 			set_cell(layer, Vector2(pos_x, pos_y), 0, Vector2(tile_x, tile_y), 0)
 			
 			#Sprawdzanie czy mamy miejsce na gniazdo
 			if EnoughSpace(pos_x,pos_y,layer,1,[0]):
-				AddNest(pos_x,pos_y)
+				AddObjectToMap(pos_x,pos_y,1)
 			
 			if EnoughSpace(pos_x,pos_y,layer,1,[1,2]):
-				AddTree(pos_x,pos_y)
+				AddObjectToMap(pos_x,pos_y,2)
 
 	# Zwolnienie pamięci 
 	tile_x_noise = null
@@ -80,20 +74,15 @@ func IsInArray(table:Array,value:int)->bool:
 			found = true
 	return found
 	
-func AddNest(pos_x:int,pos_y:int)->void:
-
-	#Zamian współżadnych map na globalne
-	var cord = map_to_local(Vector2i(pos_x,pos_y))
 	
-	#Obliczenia z_index dla gniazda
-	var index = GlobaData.world_size - pos_x + 100
+func AddObjectToMap(pos_x, pos_y, type_of_objecte):
+	var object_type = {
+		1: "Plase_nest", # Alien_nest
+		2: "Plase_tree"  # Tree
+		}
+		
+	var object_posytion = map_to_local(Vector2i(pos_x,pos_y))
+	var index = GlobaData.index - object_posytion.x + type_of_objecte
 	
-	#Wysłanie sygnału ustawiającego gniazdo
-	emit_signal("Plase_nest", cord.x, cord.y, index)
-
-func AddTree(pos_x,pos_y):
-	var cord = map_to_local(Vector2i(pos_x,pos_y))
-
-	var index = GlobaData.world_size - pos_x + 100
-
-	emit_signal("Plase_tree", cord.x, cord.y, index)
+	emit_signal( object_type[type_of_objecte], object_posytion.x, object_posytion.y, index)
+	pass
