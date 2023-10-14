@@ -8,7 +8,7 @@ var z_index:int
 var teren:int
 var biom:int
 
-func _init(x:int, y:int, z:int, t:int, b:int):
+func _init(x:int, y:int, z:int, t:int, b:int) -> void:
 	pos_x = x
 	pos_y = y
 	z_index = z

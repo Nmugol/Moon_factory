@@ -3,7 +3,7 @@ extends Node2D
 var nest_scene = preload("res://Scenes/alien_nest.tscn")
 
 
-func _on_teren_plase_nest(position_x:int, position_y:int, z_Index:int):
+func _on_teren_plase_nest(position_x:int, position_y:int, z_Index:int) -> void:
 	#Szansa na pojawinei się gniazda
 	var chance_to_appear:int = randi() % 100 + 1
 	if chance_to_appear <= 10:

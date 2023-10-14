@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://cunxu35sue8wm" path="res://Img/Teren_tails_map.png" id="1_rlahp"]
 [ext_resource type="Script" path="res://Script/Teren.gd" id="2_ojggk"]
-[ext_resource type="Script" path="res://Script/Nest.gd" id="3_4afvc"]
-[ext_resource type="Script" path="res://Script/Tree.gd" id="4_tqqa1"]
+[ext_resource type="Script" path="res://Script/AlienNestMenager.gd" id="3_xp2n3"]
+[ext_resource type="Script" path="res://Script/TreeMenager.gd" id="4_qylbs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3cp67"]
 texture = ExtResource("1_rlahp")
@@ -83,10 +83,10 @@ layer_6/tile_data = PackedInt32Array()
 script = ExtResource("2_ojggk")
 
 [node name="Aline_nest" type="Node2D" parent="Teren"]
-script = ExtResource("3_4afvc")
+script = ExtResource("3_xp2n3")
 
 [node name="Tree" type="Node2D" parent="Teren"]
-script = ExtResource("4_tqqa1")
+script = ExtResource("4_qylbs")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.25, 0.25)
